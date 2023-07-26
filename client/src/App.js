@@ -17,6 +17,11 @@ function App() {
     }
   }, [data])
 
+  const resetForm = () => {
+    setUserName('');
+    setUserAge(0);
+  }
+
   const handleCreateUser = () => {
     createUserMutation({
       variables: {
@@ -26,6 +31,7 @@ function App() {
         }
       }
     })
+    resetForm();
   }
 
   return (
