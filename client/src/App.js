@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import { useMutation, useQuery } from '@apollo/client';
-import { GET_ALL_USERS } from './query/user';
+import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
+import { GET_ALL_USERS, GET_USER } from './query/user';
 import { CREATE_USER } from './mutation/user';
 
 function App() {
   const { data, loading, error, refetch } = useQuery(GET_ALL_USERS);
+  const [getUserQuery] = useLazyQuery(GET_USER);
   const [createUserMutation] = useMutation(CREATE_USER);
   const [users, setUsers] = useState([]);
   const [userName, setUserName] = useState('');
@@ -34,6 +35,15 @@ function App() {
     resetForm();
   }
 
+  const getUser = async (userId) => {
+    const retrievedUser = await getUserQuery({
+      variables: {
+        id: userId,
+      }
+    })
+    console.log('retrievedUser', retrievedUser.data.getUser)
+  }
+
   return (
     <div className="app">
       <form>
@@ -52,7 +62,7 @@ function App() {
       <div className="usersList">
         {
           users.map(user => (
-            <div key={user.id} className="user">
+            <div key={user.id} className="user" onClick={() => getUser(user.id)}>
               {user.id}. {user.username} {user.age}
             </div>
           ))
