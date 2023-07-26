@@ -5,7 +5,7 @@ import { GET_ALL_USERS } from './query/user';
 import { CREATE_USER } from './mutation/user';
 
 function App() {
-  const { data, loading, error } = useQuery(GET_ALL_USERS);
+  const { data, loading, error, refetch } = useQuery(GET_ALL_USERS);
   const [createUserMutation] = useMutation(CREATE_USER);
   const [users, setUsers] = useState([]);
   const [userName, setUserName] = useState('');
@@ -43,7 +43,9 @@ function App() {
           <button type="button" onClick={handleCreateUser}>
             Create a user
           </button>
-          <button>Retrieve users</button>
+          <button type="button" onClick={() => refetch()}>
+            Retrieve users
+          </button>
         </div>
       </form>
 
