@@ -24,4 +24,7 @@ app.use('/graphql', graphqlHTTP({
   rootValue: root,
 }))
 
-app.listen(5000, () => console.log('server started on port 5000'))
+const server = app.listen(
+	5000,
+	() => console.log(`server started on port ${server.address().port}`)
+)
