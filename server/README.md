@@ -5,8 +5,10 @@
 
 ### Step 1
 
+```
 npm i express@4.17.1 graphql@15.4.0 express-graphql@0.12.0 cors@2.8.5
 npm i nodemon@3.0.1 --save-dev
+```
 
 
 ### Step 2
